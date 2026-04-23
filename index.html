@@ -1,53 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Calculus & Algebra Study Portal</title>
+    <title>Math Study Dashboard</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; text-align: center; padding-top: 50px; margin: 0; }
-        .container { max-width: 800px; margin: auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h1 { color: #1a73e8; }
-        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
-        .math-btn { padding: 20px; background: #fff; border: 2px solid #1a73e8; color: #1a73e8; border-radius: 8px; font-weight: 600; cursor: pointer; text-decoration: none; transition: 0.3s; }
-        .math-btn:hover { background: #1a73e8; color: white; }
-        
-        /* The hidden game window */
-        #game-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 1000; }
+        body { font-family: sans-serif; background-color: #f4f4f4; text-align: center; padding-top: 50px; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .btn { display: block; width: 80%; margin: 15px auto; padding: 15px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; cursor: pointer; border: none; }
+        .btn:hover { background: #0056b3; }
+        #game-layer { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; }
         iframe { width: 100%; height: 100%; border: none; }
-        #close-btn { position: absolute; top: 10px; right: 20px; color: white; cursor: pointer; font-size: 24px; opacity: 0.1; }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <h1>Semester 2 Study Dashboard</h1>
-        <p>Select a module to begin your review sessions.</p>
-        <div class="btn-grid">
-            <div class="math-btn" onclick="startGame()">Module 1: Advanced Derivatives</div>
-            <div class="math-btn">Module 2: Integral Calculus</div>
-            <div class="math-btn">Module 3: Linear Algebra</div>
-            <div class="math-btn">Practice Final Exam</div>
-        </div>
+        <h1>Semester 2 Math Review</h1>
+        <p>Click a module to begin your practice session.</p>
+        <button class="btn" onclick="openGame()">Module 1: Advanced Derivatives</button>
+        <button class="btn">Module 2: Integral Calculus</button>
     </div>
 
-    <!-- This is the secret game layer -->
-    <div id="game-overlay">
-        <div id="close-btn" onclick="hideGame()">×</div>
+    <div id="game-layer">
         <iframe id="game-frame" src=""></iframe>
     </div>
 
     <script>
-        function startGame() {
-            // Using the working link from irv77 that already has all files uploaded
+        function openGame() {
+            // This pulls the game from a working link so you don't have to upload files
             document.getElementById('game-frame').src = "https://github.io";
-            document.getElementById('game-overlay').style.display = 'block';
+            document.getElementById('game-layer').style.display = 'block';
         }
-        function hideGame() {
-            document.getElementById('game-overlay').style.display = 'none';
-            document.getElementById('game-frame').src = ""; // Stops game sound
-        }
-        // Press 'Esc' to instantly hide the game
         document.addEventListener('keydown', function(e) {
-            if (e.key === "Escape") hideGame();
+            if (e.key === "Escape") { // Tap ESC to hide the game instantly
+                document.getElementById('game-layer').style.display = 'none';
+                document.getElementById('game-frame').src = ""; 
+            }
         });
     </script>
 </body>
